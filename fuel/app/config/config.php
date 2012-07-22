@@ -10,6 +10,9 @@
  * @link       http://fuelphp.com
  */
 
+// set default charset
+ini_set('default_charset', 'UTF-8');
+
 return array(
 
 	/**
@@ -41,7 +44,7 @@ return array(
 	 *
 	 * Set this to false or remove if you using mod_rewrite.
 	 */
-	'index_file'  => 'index.php',
+	'index_file'  => false,
 
 	'profiling'  => false,
 
@@ -73,9 +76,9 @@ return array(
 	/**
 	 * Localization & internationalization settings
 	 */
-	'language'           => 'en', // Default language
+	'language'           => 'ja', // Default language
 	'language_fallback'  => 'en', // Fallback language when file isn't available for default language
-	'locale'             => 'en_US', // PHP set_locale() setting, null to not set
+	'locale'             => null, // PHP set_locale() setting, null to not set
 
 	'encoding'  => 'UTF-8',
 
@@ -86,7 +89,7 @@ return array(
 	 * default_timezone		optional, if you want to change the server's default timezone
 	 */
 	'server_gmt_offset'  => 0,
-	'default_timezone'   => 'UTC',
+	'default_timezone'   => 'Asia/Tokyo',
 
 	/**
 	 * Logging Threshold.  Can be set to any of the following:
@@ -98,7 +101,7 @@ return array(
 	 * Fuel::L_INFO
 	 * Fuel::L_ALL
 	 */
-	'log_threshold'    => Fuel::L_WARNING,
+	'log_threshold'    => Fuel::L_ALL,
 	'log_path'         => APPPATH.'logs/',
 	'log_date_format'  => 'Y-m-d H:i:s',
 
