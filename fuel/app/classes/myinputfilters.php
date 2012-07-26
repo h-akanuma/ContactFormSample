@@ -17,6 +17,7 @@ class MyInputFilters {
 			// エラーの場合はログに記録
 			Log::error('Invalid character encoding: ' . Input::uri() . ' ' . urlencode($value) . ' '. Input::ip() . ' "' . Input::user_agent() . '"');
 			// エラーを表示して終了
+			throw new HttpInvalidInputException('Invalid input data');
 		}
 	}
 }
