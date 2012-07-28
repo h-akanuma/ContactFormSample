@@ -148,7 +148,7 @@ class Test_Functional_Form extends FunctionalTestCase {
 		$form = static::$crawler->selectButton('form_submit')->form();
 		static::$post = array(
 			'name' => 'foo',
-			'email' => 'foo@example.jp',
+			'email' => 'hiroaki.akanuma@gmail.com',
 			'comment' => '正常データを確認ページに送信。' . "\n" .
 				         '正常データを確認ページに送信。',
 		);
@@ -168,6 +168,18 @@ class Test_Functional_Form extends FunctionalTestCase {
 		$test = static::$crawler->filter('p')->eq(2)->text();
 		$pattern = '/' . preg_quote(static::$post['comment']) . '/u';
 		$this->assertRegExp($pattern, $test);
+	}
+	
+	public function test_送信ボタンを押す() {
+		$form = static::$crawler->selectButton('form_submit2')->form();
+		static::$crawler = static::$client->submit($form);
+		
+		$test = 'コンタクトフォーム：送信完了';
+		$this->assertEquals($test, static::$crawler->filter('title')->text());
+		
+		$test = static::$crawler->filter('p')->text();
+		$expected = '送信完了しました。';
+		$this->assertEquals($expected, $test);
 	}
 	
 }
