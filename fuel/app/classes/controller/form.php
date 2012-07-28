@@ -1,6 +1,6 @@
 <?php
 
-class Controller_Form extends Controller_Template {
+class Controller_Form extends Controller_Public {
 	
 	public function action_index() {
 		$this->template->title = 'コンタクトフォーム';
