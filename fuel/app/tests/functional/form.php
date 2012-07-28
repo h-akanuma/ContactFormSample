@@ -37,4 +37,24 @@ class Test_Functional_Form extends FunctionalTestCase {
 		
 		$this->assertEquals('お問い合わせ', static::$crawler->filter('h1')->text());
 	}
+	
+	public function test_空欄のまま確認ボタンを押す() {
+		$form = static::$crawler->selectButton('form_submit')->form();
+		static::$crawler = static::$client->submit($form);
+		
+		$test = 'コンタクトフォーム：エラー';
+		$this->assertEquals($test, static::$crawler->filter('title')->text());
+		
+		$test = static::$crawler->filter('li')->text();
+		$expected = '名前 欄は必須です。';
+		$this->assertEquals($expected, $test);
+		
+		$test = static::$crawler->filter('li')->eq(1)->text();
+		$expected = 'メールアドレス 欄は必須です。';
+		$this->assertEquals($expected, $test);
+		
+		$test = static::$crawler->filter('li')->eq(2)->text();
+		$expected = 'コメント 欄は必須です。';
+		$this->assertEquals($expected, $test);
+	}
 }
