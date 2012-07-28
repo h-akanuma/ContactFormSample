@@ -90,4 +90,28 @@ class Test_Functional_Form extends FunctionalTestCase {
 		$this->assertEquals($expected, $test);
 	}
 	
+	public function test_最大文字数を超えて入力() {
+		$form = static::$crawler->selectButton('form_submit')->form();
+		static::$crawler = static::$client->submit($form, array(
+			'name' => str_repeat('あ', 51),
+			'email' => str_repeat('a', 90) . '@example.jp',
+			'comment' => str_repeat('あ', 401),
+		));
+		
+		$test = 'コンタクトフォーム：エラー';
+		$this->assertEquals($test, static::$crawler->filter('title')->text());
+		
+		$test = static::$crawler->filter('li')->text();
+		$expected = '名前 欄は 50 文字を超えないようにしてください。';
+		$this->assertEquals($expected, $test);
+		
+		$test = static::$crawler->filter('li')->eq(1)->text();
+		$expected = 'メールアドレス 欄は 100 文字を超えないようにしてください。';
+		$this->assertEquals($expected, $test);
+		
+		$test = static::$crawler->filter('li')->eq(2)->text();
+		$expected = 'コメント 欄は 400 文字を超えないようにしてください。';
+		$this->assertEquals($expected, $test);
+	}
+	
 }
