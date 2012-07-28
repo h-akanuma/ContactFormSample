@@ -3,7 +3,7 @@
 require_once APPPATH . 'vendor/Goutte/goutte.phar';
 use Goutte\Client;
 
-abstract class FuncionalTestCase extends \Fuel\Core\TestCase {
+abstract class FunctionalTestCase extends \Fuel\Core\TestCase {
 	const BASE_URL = 'http://localhost/contact/';
 	
 	protected static $client; // Clientオブジェクト
