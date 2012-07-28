@@ -30,7 +30,7 @@ class MyInputFilters {
 		}
 		
 		// 改行コードとタブを除く制御文字が含まれないか
-		if (preg_match('/\[\r\n\t[:~cntrl:]]*\z/u', $value) === 1) {
+		if (preg_match('/\A[\r\n\t[:^cntrl:]]*\z/u', $value) === 1) {
 			return $value;
 		} else {
 			// 含まれている場合はログに記録
