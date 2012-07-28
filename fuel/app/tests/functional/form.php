@@ -114,4 +114,17 @@ class Test_Functional_Form extends FunctionalTestCase {
 		$this->assertEquals($expected, $test);
 	}
 	
+	public function test_最大文字数まで入力() {
+		$form = static::$crawler->selectButton('form_submit')->form();
+		static::$post = array(
+			'name' => str_repeat('あ', 50),
+			'email' => str_repeat('a', 64) . '@' . str_repeat('b', 24) . '.example.jp',
+			'comment' => str_repeat('あ', 400),
+		);
+		static::$crawler = static::$client->submit($form, static::$post);
+		
+		$test = 'コンタクトフォーム：確認';
+		$this->assertEquals($test, static::$crawler->filter('title')->text());
+	}
+	
 }
