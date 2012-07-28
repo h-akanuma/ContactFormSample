@@ -57,4 +57,21 @@ class Test_Functional_Form extends FunctionalTestCase {
 		$expected = 'コメント 欄は必須です。';
 		$this->assertEquals($expected, $test);
 	}
+	
+	public function test_名前にタブを含める(){
+		$form = static::$crawler->selectButton('form_submit')->form();
+		static::$crawler = static::$client->submit($form, array(
+			'name' => "abc\txyz",
+			'email' => '',
+			'comment' => '',
+		));
+		
+		$test = 'コンタクトフォーム：エラー';
+		$this->assertEquals($test, static::$crawler->filter('title')->text());
+		
+		$test = static::$crawler->filter('li')->text();
+		$expected = '名前 欄にはタブや改行を含めないようにしてください。';
+		$this->assertEquals($expected, $test);
+	} 
+	
 }
