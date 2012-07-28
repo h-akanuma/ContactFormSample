@@ -74,4 +74,20 @@ class Test_Functional_Form extends FunctionalTestCase {
 		$this->assertEquals($expected, $test);
 	} 
 	
+	public function test_メールアドレスに改行を含める() {
+		$form = static::$crawler->selectButton('form_submit')->form();
+		static::$crawler = static::$client->submit($form, array(
+			'name' => '',
+			'email' => "foo@example.jp\nbar",
+			'comment' => '',
+		));
+		
+		$test = 'コンタクトフォーム：エラー';
+		$this->assertEquals($test, static::$crawler->filter('title')->text());
+		
+		$test = static::$crawler->filter('li')->eq(1)->text();
+		$expected = 'メールアドレス 欄にはタブや改行を含めないようにしてください。';
+		$this->assertEquals($expected, $test);
+	}
+	
 }
