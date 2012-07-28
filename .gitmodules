@@ -16,3 +16,6 @@
 [submodule "fuel/packages/orm"]
 	path = fuel/packages/orm
 	url = git://github.com/fuel/orm.git
+[submodule "fuel/app/vendor/Goutte"]
+	path = fuel/app/vendor/Goutte
+	url = git://github.com/fabpot/Goutte.git

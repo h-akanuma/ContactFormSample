@@ -92,7 +92,7 @@ return array(
 			'host'		=> 'ssl://smtp.gmail.com',
 			'port'		=> 465,
 			'username'	=> 'xxxxxxxxxx@gmail.com',
-			'password'	=> 'xxxxxxxx',
+			'password'	=> 'xxxxxxxxxx',
 			'timeout'	=> 5,
 		),
 
