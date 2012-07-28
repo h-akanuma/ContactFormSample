@@ -127,4 +127,21 @@ class Test_Functional_Form extends FunctionalTestCase {
 		$this->assertEquals($test, static::$crawler->filter('title')->text());
 	}
 	
+	public function test_修正ボタンを押す() {
+		$form = static::$crawler->selectButton('form_submit1')->form();
+		static::$crawler = static::$client->submit($form);
+		
+		$test = 'コンタクトフォーム';
+		$this->assertEquals($test, static::$crawler->filter('title')->text());
+		
+		$test = static::$crawler->filter('input')->eq(0)->attr('value');
+		$this->assertEquals(static::$post['name'], $test);
+		
+		$test = static::$crawler->filter('input')->eq(1)->attr('value');
+		$this->assertEquals(static::$post['email'], $test);
+		
+		$test = static::$crawler->filter('textarea')->text();
+		$this->assertEquals(static::$post['comment'], $test);
+	}
+	
 }
