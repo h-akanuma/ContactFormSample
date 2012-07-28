@@ -15,16 +15,19 @@ class Controller_Form extends Controller_Public {
 	}
 	
 	public function action_confirm() {
-		$val = $this->get_validation()->add_callable('MyValidationRules');
+		$form = $this->get_form();
+		$val = $form->validation()->add_callable('MyValidationRules');
 		
 		if ($val->run()) {
 			$data['input'] = $val->validated();
 			$this->template->title = 'コンタクトフォーム：確認';
 			$this->template->content = View::forge('form/confirm', $data);
 		} else {
+			$form->repopulate();
 			$this->template->title = 'コンタクトフォーム：エラー';
 			$this->template->content = View::forge('form/index');
 			$this->template->content->set_safe('html_error', $val->show_errors());
+			$this->template->content->set_safe('html_form', $form->build('form/confirm'));
 		}
 	}
 	
