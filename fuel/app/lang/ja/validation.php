@@ -15,4 +15,7 @@ return array(
 	'numeric_min'   => 'The minimum numeric value of :label must be :param:1',
 	'numeric_max'   => 'The maximum numeric value of :label must be :param:1',
 	'valid_string'  => 'The valid string rule :rule(:param:1) failed for field :label',
+		
+	// 独自ルール
+	'no_tab_and_newline' => ':label 欄にはタブや改行を含めないようにしてください。',
 );

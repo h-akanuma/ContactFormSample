@@ -8,7 +8,7 @@ class Controller_Form extends Controller_Template {
 	}
 	
 	public function action_confirm() {
-		$val = $this->get_validation();
+		$val = $this->get_validation()->add_callable('MyValidationRules');
 		
 		if ($val->run()) {
 			$data['input'] = $val->validated();
@@ -27,7 +27,7 @@ class Controller_Form extends Controller_Template {
 			return 'ページ遷移が正しくありません。';
 		}
 		
-		$val = $this->get_validation();
+		$val = $this->get_validation()->add_callable('MyValidationRules');
 		
 		if (!$val->run()) {
 			$this->template->title = 'コンタクトフォーム：エラー';
@@ -64,11 +64,13 @@ class Controller_Form extends Controller_Template {
 		$val->add('name', '名前')
 			->add_rule('trim')
 			->add_rule('required')
+			->add_rule('no_tab_and_newline')
 			->add_rule('max_length', 50);
 		
 		$val->add('email', 'メールアドレス')
 			->add_rule('trim')
 			->add_rule('required')
+			->add_rule('no_tab_and_newline')
 			->add_rule('max_length', 100)
 			->add_rule('valid_email');
 		
@@ -83,7 +85,7 @@ class Controller_Form extends Controller_Template {
 	public function build_mail($post) {
 		$data['from'] = $post['email'];
 		$data['from_name'] = $post['name'];
-		$data['to'] = 'info@example.jp';
+		$data['to'] = 'hiroaki.akanuma@gmail.com';
 		$data['to_name'] = '管理者';
 		$data['subject'] = 'コンタクトフォーム';
 		
