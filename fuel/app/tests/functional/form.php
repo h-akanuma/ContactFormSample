@@ -144,4 +144,30 @@ class Test_Functional_Form extends FunctionalTestCase {
 		$this->assertEquals(static::$post['comment'], $test);
 	}
 	
+	public function test_正常データを確認ページに送信() {
+		$form = static::$crawler->selectButton('form_submit')->form();
+		static::$post = array(
+			'name' => 'foo',
+			'email' => 'foo@example.jp',
+			'comment' => '正常データを確認ページに送信。' . "\n" .
+				         '正常データを確認ページに送信。',
+		);
+		static::$crawler = static::$client->submit($form, static::$post);
+		
+		$test = 'コンタクトフォーム：確認';
+		$this->assertEquals($test, static::$crawler->filter('title')->text());
+		
+		$test = static::$crawler->filter('p')->eq(0)->text();
+		$pattern = '/' . preg_quote(static::$post['name']) . '/u';
+		$this->assertRegExp($pattern, $test);
+		
+		$test = static::$crawler->filter('p')->eq(1)->text();
+		$pattern = '/' . preg_quote(static::$post['email']) . '/u';
+		$this->assertRegExp($pattern, $test);
+		
+		$test = static::$crawler->filter('p')->eq(2)->text();
+		$pattern = '/' . preg_quote(static::$post['comment']) . '/u';
+		$this->assertRegExp($pattern, $test);
+	}
+	
 }
