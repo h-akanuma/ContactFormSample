@@ -12,12 +12,12 @@ return array(
 	 * Base config, just need to set the DSN, username and password in env. config.
 	 */
 	'default' => array(
-		'type'        => 'pdo',
+		'type'        => 'mysqli',
 		'connection'  => array(
 			'persistent' => false,
 		),
 		'identifier'   => '`',
-		'table_prefix' => '',
+		'table_prefix' => 'cf_',
 		'charset'      => 'utf8',
 		'enable_cache' => true,
 		'profiling'    => false,
