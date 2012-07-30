@@ -8,7 +8,7 @@ class DbFixture {
 	public static function load($table, $file) {
 		$fixt_name = $file . '_fixt';
 		$file_name = $fixt_name . '.' . static::$file_ext;
-		$fixt_file = APPPAT . 'tests/fixture/' . $file_name;
+		$fixt_file = APPPATH . 'tests/fixture/' . $file_name;
 		
 		if(!file_exists($fixt_file)) {
 			exit('No such file: ' . $fixt_file . PHP_EOL);
@@ -28,7 +28,7 @@ class DbFixture {
 		}
 		
 		$ret = Log::info(
-			'Table Fixture ' . $file_name . ' -> ' . $fixt_name . ' loaded', ___METHOD__
+			'Table Fixture ' . $file_name . ' -> ' . $fixt_name . ' loaded', __METHOD__
 		);
 		
 		return $data;
