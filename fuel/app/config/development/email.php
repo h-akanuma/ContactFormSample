@@ -91,8 +91,8 @@ return array(
 		'smtp'	=> array(
 			'host'		=> 'ssl://smtp.gmail.com',
 			'port'		=> 465,
-			'username'	=> 'xxxxxxxxxx@gmail.com',
-			'password'	=> 'xxxxxxxxxx',
+			'username'	=> 'hiroaki.akanuma@gmail.com',
+			'password'	=> 'yudu0801',
 			'timeout'	=> 5,
 		),
 

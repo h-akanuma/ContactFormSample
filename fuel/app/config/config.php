@@ -147,6 +147,7 @@ return array(
 			'Fuel\\Core\\View',
 			'Fuel\\Core\\ViewModel',
 			'Closure',
+			'Fuel\\Core\\Validation',
 		)
 	),
 
@@ -216,7 +217,8 @@ return array(
 		 * );
 		 */
 		'packages'  => array(
-			//'orm',
+			'orm',
+			'auth',
 		),
 
 		/**
